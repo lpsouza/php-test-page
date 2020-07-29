@@ -12,6 +12,7 @@
     <h1><?= $hostname ?></h1>
     <?php
         file("https://via.placeholder.com/1920x1080");
+        
         $time_end = microtime(true);
         $time = $time_end - $time_start;
     ?><p>Page loaded in <?= round($time, 2) ?> seconds.</p>
