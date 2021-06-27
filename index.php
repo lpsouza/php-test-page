@@ -1,6 +1,10 @@
 <?php
+    if (@$_GET["phpinfo"] == 1) {
+        phpinfo();
+        die();
+    }
     $time_start = microtime(true);
-    $hostname = php_uname('n');
+    $hostname = php_uname("n");
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +15,21 @@
 <body>
     <h1><?= $hostname ?></h1>
     <?php
-        file("https://via.placeholder.com/1920x1080");
-        
+		if (@$_GET["size"] > 0) {
+			set_time_limit(300);
+			echo "<div style=\"display: none\">";
+			for ($i=0; $i <= $_GET["size"]; $i++) { 
+				echo "a";
+			}
+			echo "</div>";
+		}
+
         $time_end = microtime(true);
         $time = $time_end - $time_start;
     ?><p>Page loaded in <?= round($time, 2) ?> seconds.</p>
+
+    <p><a href="?size=5000000">5Mb load</a></p>
+    <p><a href="?size=10000000">10Mb load</a></p>
+    <p><a href="?phpinfo=1">phpinfo();</a></p>
 </body>
 </html>
